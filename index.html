@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Arranger</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#arrange-form').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/arrange',
+                    data: formData,
+                    success: function(response) {
+                        $('#arranged-problems').html(response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Arithmetic Arranger</h1>
+    <form id="arrange-form">
+        <label for="problems">Enter arithmetic problems (e.g., "32 + 698"): </label><br>
+        <input type="text" name="problem" required><br>
+        <input type="text" name="problem" required><br>
+        <input type="text" name="problem" required><br>
+        <input type="text" name="problem" required><br>
+        <input type="checkbox" name="show_answers"> Show answers<br>
+        <button type="submit">Arrange</button>
+    </form>
+    <div id="arranged-problems"></div>
+</body>
+</html>
